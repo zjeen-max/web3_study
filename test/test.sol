@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
-contract HelloWord{
+contract HelloWorld{
     struct Info {
         string phrase;
         uint256 id;

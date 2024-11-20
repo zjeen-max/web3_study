@@ -1,0 +1,108 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					}
+				],
+				"name": "callSayHelloFromFactory",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "str",
+						"type": "string"
+					}
+				],
+				"name": "callSetHelloFromFactory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "createHelloword",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"test/helloFactory.sol": "HelloWorldFactory"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"test/helloFactory.sol": {
+			"keccak256": "0x461c1c2ac257610de0b0ad3d6c6144f97d70ca89798fe97561e02f0c91354ade",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://2ff648ebfb3da08ec28ee25969a3ce7aa23b2450373c66c3a3e8be6e789900e9",
+				"dweb:/ipfs/QmfMT8kXdt37imAaG7GMSRzj6vsWjpaRZnxq2BwMhfekS6"
+			]
+		},
+		"test/test.sol": {
+			"keccak256": "0x34912d7f972007902608564bf26f6f4f6bd422f2488dd82fb29916dd635b494a",
+			"license": "UNLICENSED",
+			"urls": [
+				"bzz-raw://560b9c05b9bff56f0e1371cbd3966ef34453c3ef994e253cc753065e599505e0",
+				"dweb:/ipfs/QmNZ5tdzikngoR6dFVPRk78zDryW6uZuvBAJmFGespSCh8"
+			]
+		}
+	},
+	"version": 1
+}
