@@ -88,11 +88,11 @@
 	},
 	"sources": {
 		"test/helloFactory.sol": {
-			"keccak256": "0x461c1c2ac257610de0b0ad3d6c6144f97d70ca89798fe97561e02f0c91354ade",
+			"keccak256": "0x88273d71f9fcde8c677c2014de585eea78eccab8145ba4aac5e866754f048db8",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://2ff648ebfb3da08ec28ee25969a3ce7aa23b2450373c66c3a3e8be6e789900e9",
-				"dweb:/ipfs/QmfMT8kXdt37imAaG7GMSRzj6vsWjpaRZnxq2BwMhfekS6"
+				"bzz-raw://c707ec829e010f5ca13d5c3271cb28c6eb31e134fd316567e06fe9b0e2149297",
+				"dweb:/ipfs/QmNzqa2NzcLKiq7Q9UeX7FbsgGXy8hXbF68chNiyCJ9gTi"
 			]
 		},
 		"test/test.sol": {

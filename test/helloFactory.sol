@@ -2,6 +2,7 @@
 pragma solidity ^0.8.20;
 import { HelloWorld } from "./test.sol";
 
+// 工厂模式
 contract HelloWorldFactory {
     HelloWorld hw;
     HelloWorld[] hws;
