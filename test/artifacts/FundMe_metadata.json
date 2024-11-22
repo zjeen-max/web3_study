@@ -111,7 +111,7 @@
 		"compilationTarget": {
 			"test/fundMe.sol": "FundMe"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "cancun",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
