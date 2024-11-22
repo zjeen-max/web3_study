@@ -13,14 +13,25 @@ contract FundMe{
 
     uint256 constant TARGET = 1000 * 10**18;
 
-    constructor() {
+    address public owner;
+    //时间锁
+    uint256 deploymentTimestamp; //开始时间
+    uint256 lockTime; // 锁定时间
+
+
+    constructor(uint256 _lockTime) {
         //设置eth的spolice 测试网 eth兑usd的合约地址
         dataFeed = AggregatorV3Interface(
             0x694AA1769357215DE4FAC081bf1f309aDC325306
         );
+        owner = msg.sender;
+        lockTime = _lockTime;
+        // 区块的时间
+        deploymentTimestamp = block.timestamp;
     }
     function fund() external payable{
         require(convertEthToUsd(msg.value) >= MINIMUM_VALUE, "send more ETH");
+        require(block.timestamp < deploymentTimestamp + lockTime,"window si closed");
         fundersToAmount[msg.sender] = msg.value;
     }
     // 预言机 https://docs.chain.link/ 
@@ -45,10 +56,30 @@ contract FundMe{
         uint256 ethPrice = uint256(getChainlinkDataFeedLatestAnswer());
         return ethAmount * ethPrice/(10**8);
     }
-
-    // 查看筹集资金是否大于1000
-    function getFund() external view {
-        
+    // 判断是否是自己
+    function transferOwenerShip(address newOwner) public {
+        require(msg.sender == owner,"this function can only be called by owner");
+        owner = newOwner;
+    }
+    // 查看筹集资金是否大于1000,大于则提取ETH
+    function getFund() external {
         require(convertEthToUsd(address(this).balance) >= TARGET,"Target is not reached");
+        require(msg.sender == owner,"there is no fund for you");
+        require(block.timestamp >= deploymentTimestamp+lockTime,"window is close");
+        //call 提取
+        bool success;
+        (success,)=payable(msg.sender).call{value: address(this).balance}(""); 
+        require(success,"transfer tx failed");
+        fundersToAmount[msg.sender] = 0;
+    }
+    function refund() external {
+        require(convertEthToUsd(address(this).balance)<TARGET,"target is reached");
+        require(fundersToAmount[msg.sender]!=0,"ther is no fund for you");
+        require(block.timestamp >= deploymentTimestamp+lockTime,"window is close");
+        bool success;
+        (success,)=payable(msg.sender).call{value:fundersToAmount[msg.sender]}("");
+        require(success,"transfer tx failed");
+        // 归零
+        fundersToAmount[msg.sender] = 0;
     }
 }
