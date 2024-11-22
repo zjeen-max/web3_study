@@ -57,29 +57,36 @@ contract FundMe{
         return ethAmount * ethPrice/(10**8);
     }
     // 判断是否是自己
-    function transferOwenerShip(address newOwner) public {
-        require(msg.sender == owner,"this function can only be called by owner");
+    function transferOwenerShip(address newOwner) public onlyOwner{
         owner = newOwner;
     }
     // 查看筹集资金是否大于1000,大于则提取ETH
-    function getFund() external {
+    function getFund() external windowClose{
         require(convertEthToUsd(address(this).balance) >= TARGET,"Target is not reached");
         require(msg.sender == owner,"there is no fund for you");
-        require(block.timestamp >= deploymentTimestamp+lockTime,"window is close");
+        
         //call 提取
         bool success;
         (success,)=payable(msg.sender).call{value: address(this).balance}(""); 
         require(success,"transfer tx failed");
         fundersToAmount[msg.sender] = 0;
     }
-    function refund() external {
+    function refund() external windowClose{
         require(convertEthToUsd(address(this).balance)<TARGET,"target is reached");
         require(fundersToAmount[msg.sender]!=0,"ther is no fund for you");
-        require(block.timestamp >= deploymentTimestamp+lockTime,"window is close");
         bool success;
         (success,)=payable(msg.sender).call{value:fundersToAmount[msg.sender]}("");
         require(success,"transfer tx failed");
         // 归零
         fundersToAmount[msg.sender] = 0;
+    }
+    // 修改器
+    modifier windowClose(){
+        require(block.timestamp >= deploymentTimestamp+lockTime,"window is close");
+        _; // 表示继承该修改器的其他操作
+    }
+    modifier onlyOwner(){
+        require(msg.sender == owner,"this function can only be called by owner");
+        _;
     }
 }
